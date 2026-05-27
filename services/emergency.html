@@ -860,14 +860,15 @@ small, .text-small { font-size: var(--text-sm); }
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  /* CTC brand blue (#045D91) — was rgba(0,0,107,...) which carried over from
-     Starnes (#00006B) and felt off-brand. Using the literal logo blue makes
-     the header read as CTC at a glance. */
-  background: rgba(4, 93, 145, 0.92);
+  /* CTC deep navy (#023A5C — same as the footer). Harmonizes header + footer
+     into a single "navy bracket" around the cream content. The brighter logo
+     blue (#045D91) is reserved for accents (eyebrows, highlights, hover). */
+  background: rgba(2, 58, 92, 0.92);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  /* Border tinted to CTC sky (--color-primary-soft #7CB8DC) — was Starnes pale blue */
-  border-bottom: 1px solid rgba(124, 184, 220, 0.35);
+  /* Border tinted to the brighter brand blue at low alpha — a hairline accent
+     between header and content. */
+  border-bottom: 1px solid rgba(4, 93, 145, 0.45);
   height: var(--header-height);
   display: flex;
   align-items: center;
@@ -876,7 +877,7 @@ small, .text-small { font-size: var(--text-sm); }
 
 .site-header.is-scrolled {
   box-shadow: 0 1px 0 rgba(0,0,0,0.4), var(--shadow-sm);
-  background: rgba(4, 93, 145, 0.97);
+  background: rgba(2, 58, 92, 0.97);
 }
 
 .site-header__inner {
@@ -977,11 +978,11 @@ small, .text-small { font-size: var(--text-sm); }
   top: calc(100% + 6px);
   left: -8px;
   min-width: 240px;
-  /* CTC brand blue — matches the header it descends from. */
-  background: rgba(4, 93, 145, 0.97);
+  /* Deep navy — matches the header (and footer) it descends from. */
+  background: rgba(2, 58, 92, 0.97);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  border: 1px solid rgba(124, 184, 220, 0.35);
+  border: 1px solid rgba(4, 93, 145, 0.45);
   border-radius: var(--radius-md);
   padding: var(--space-2);
   box-shadow: var(--shadow-lg);
@@ -1841,47 +1842,47 @@ small, .text-small { font-size: var(--text-sm); }
 }
 
 
-    /* Partner strip — Honeywell accreditation callout
-       Only renders on services with a `partners` config block
-       (currently just building-controls). Same visual treatment
-       that previously lived on the home page before being moved
-       to the controls-specific page. */
+    /* Partner strip — Honeywell Certified Installer callout.
+       Light cream surface so the official Honeywell badge (red wordmark +
+       black "CERTIFIED INSTALLER" subline) reads cleanly. Only renders on
+       services with a `partners` config block — currently just
+       building-controls. */
     .partner-strip {
-      background: var(--color-primary-dark);
-      color: var(--color-text-on-dark);
+      background: var(--color-bg-soft);
+      color: var(--color-text);
       padding: var(--space-7) 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
     }
     .partner-strip__inner {
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
+      gap: var(--space-5);
       align-items: center;
       text-align: center;
     }
-    .partner-strip__eyebrow {
-      font-family: var(--font-display);
-      font-size: var(--text-sm);
-      font-weight: var(--weight-semibold);
-      letter-spacing: var(--tracking-caps);
-      text-transform: uppercase;
-      color: var(--color-accent-light);
+    .partner-strip__badge {
+      display: block;
+      max-width: 100%;
+      width: min(420px, 80%);
+      height: auto;
     }
     .partner-strip__heading {
       font-family: var(--font-display);
-      font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+      font-size: clamp(var(--text-xl), 2.4vw, var(--text-3xl));
       font-weight: var(--weight-bold);
       letter-spacing: var(--tracking-tight);
       line-height: var(--leading-tight);
+      color: var(--color-text);
       margin: 0;
       max-width: 56ch;
     }
     .partner-strip__body {
       font-size: var(--text-lg);
       line-height: var(--leading-normal);
-      color: var(--color-text-on-dark);
-      opacity: 0.9;
+      color: var(--color-text-muted);
       max-width: 64ch;
-      margin: var(--space-2) 0 0;
+      margin: 0;
     }
   </style>
 </head>
@@ -2009,7 +2010,8 @@ small, .text-small { font-size: var(--text-sm); }
 
     <!-- 1a. PARTNER STRIP — only renders if config has `partners` block.
          Used by services/building-controls to surface the Honeywell
-         accreditation as a controls-specific identity signal. -->
+         Certified Installer badge. Light surface, official badge image
+         leads, supporting copy beneath. -->
     
 
     <!-- 2. WHAT'S INCLUDED — feature grid -->

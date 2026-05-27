@@ -37,47 +37,47 @@
   <style>
     /* {{INLINE_CSS}} */
 
-    /* Partner strip — Honeywell accreditation callout
-       Only renders on services with a `partners` config block
-       (currently just building-controls). Same visual treatment
-       that previously lived on the home page before being moved
-       to the controls-specific page. */
+    /* Partner strip — Honeywell Certified Installer callout.
+       Light cream surface so the official Honeywell badge (red wordmark +
+       black "CERTIFIED INSTALLER" subline) reads cleanly. Only renders on
+       services with a `partners` config block — currently just
+       building-controls. */
     .partner-strip {
-      background: var(--color-primary-dark);
-      color: var(--color-text-on-dark);
+      background: var(--color-bg-soft);
+      color: var(--color-text);
       padding: var(--space-7) 0;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
     }
     .partner-strip__inner {
       display: flex;
       flex-direction: column;
-      gap: var(--space-3);
+      gap: var(--space-5);
       align-items: center;
       text-align: center;
     }
-    .partner-strip__eyebrow {
-      font-family: var(--font-display);
-      font-size: var(--text-sm);
-      font-weight: var(--weight-semibold);
-      letter-spacing: var(--tracking-caps);
-      text-transform: uppercase;
-      color: var(--color-accent-light);
+    .partner-strip__badge {
+      display: block;
+      max-width: 100%;
+      width: min(420px, 80%);
+      height: auto;
     }
     .partner-strip__heading {
       font-family: var(--font-display);
-      font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+      font-size: clamp(var(--text-xl), 2.4vw, var(--text-3xl));
       font-weight: var(--weight-bold);
       letter-spacing: var(--tracking-tight);
       line-height: var(--leading-tight);
+      color: var(--color-text);
       margin: 0;
       max-width: 56ch;
     }
     .partner-strip__body {
       font-size: var(--text-lg);
       line-height: var(--leading-normal);
-      color: var(--color-text-on-dark);
-      opacity: 0.9;
+      color: var(--color-text-muted);
       max-width: 64ch;
-      margin: var(--space-2) 0 0;
+      margin: 0;
     }
   </style>
 </head>
@@ -138,11 +138,14 @@
 
     <!-- 1a. PARTNER STRIP — only renders if config has `partners` block.
          Used by services/building-controls to surface the Honeywell
-         accreditation as a controls-specific identity signal. -->
+         Certified Installer badge. Light surface, official badge image
+         leads, supporting copy beneath. -->
     {{#if partners}}
     <section class="partner-strip" aria-labelledby="partner-heading">
       <div class="container partner-strip__inner">
-        <span class="partner-strip__eyebrow">{{partners.eyebrow}}</span>
+        <img class="partner-strip__badge"
+             src="../shared/img/logos/honeywell-certified-installer.png"
+             alt="Honeywell Certified Installer" />
         <h2 id="partner-heading" class="partner-strip__heading">{{partners.heading}}</h2>
         <p class="partner-strip__body">{{partners.body}}</p>
       </div>

@@ -897,14 +897,15 @@ small, .text-small { font-size: var(--text-sm); }
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  /* CTC brand blue (#045D91) — was rgba(0,0,107,...) which carried over from
-     Starnes (#00006B) and felt off-brand. Using the literal logo blue makes
-     the header read as CTC at a glance. */
-  background: rgba(4, 93, 145, 0.92);
+  /* CTC deep navy (#023A5C — same as the footer). Harmonizes header + footer
+     into a single "navy bracket" around the cream content. The brighter logo
+     blue (#045D91) is reserved for accents (eyebrows, highlights, hover). */
+  background: rgba(2, 58, 92, 0.92);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  /* Border tinted to CTC sky (--color-primary-soft #7CB8DC) — was Starnes pale blue */
-  border-bottom: 1px solid rgba(124, 184, 220, 0.35);
+  /* Border tinted to the brighter brand blue at low alpha — a hairline accent
+     between header and content. */
+  border-bottom: 1px solid rgba(4, 93, 145, 0.45);
   height: var(--header-height);
   display: flex;
   align-items: center;
@@ -913,7 +914,7 @@ small, .text-small { font-size: var(--text-sm); }
 
 .site-header.is-scrolled {
   box-shadow: 0 1px 0 rgba(0,0,0,0.4), var(--shadow-sm);
-  background: rgba(4, 93, 145, 0.97);
+  background: rgba(2, 58, 92, 0.97);
 }
 
 .site-header__inner {
@@ -1014,11 +1015,11 @@ small, .text-small { font-size: var(--text-sm); }
   top: calc(100% + 6px);
   left: -8px;
   min-width: 240px;
-  /* CTC brand blue — matches the header it descends from. */
-  background: rgba(4, 93, 145, 0.97);
+  /* Deep navy — matches the header (and footer) it descends from. */
+  background: rgba(2, 58, 92, 0.97);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  border: 1px solid rgba(124, 184, 220, 0.35);
+  border: 1px solid rgba(4, 93, 145, 0.45);
   border-radius: var(--radius-md);
   padding: var(--space-2);
   box-shadow: var(--shadow-lg);
@@ -1933,6 +1934,44 @@ small, .text-small { font-size: var(--text-sm); }
 .contact-card__value a { color: var(--color-text); font-weight: var(--weight-medium); }
 .contact-card__value a:hover { color: var(--color-accent); }
 
+
+    /* Service Area section — centered map graphic + supporting copy. */
+    .service-area-map {
+      display: flex;
+      justify-content: center;
+      margin-top: var(--space-6);
+    }
+    .service-area-map img {
+      max-width: 100%;
+      width: min(820px, 100%);
+      height: auto;
+      display: block;
+    }
+    .service-area__cities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2) var(--space-4);
+      justify-content: center;
+      list-style: none;
+      padding: 0;
+      margin: var(--space-5) auto 0;
+      max-width: 720px;
+      font-family: var(--font-display);
+      font-weight: var(--weight-medium);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      letter-spacing: var(--tracking-wide);
+      text-transform: uppercase;
+    }
+    .service-area__cities li {
+      position: relative;
+    }
+    .service-area__cities li + li::before {
+      content: "·";
+      position: absolute;
+      left: calc(var(--space-4) * -0.5 - 2px);
+      color: var(--color-border-strong);
+    }
   </style>
 </head>
 
@@ -2220,7 +2259,7 @@ small, .text-small { font-size: var(--text-sm); }
           <g class="industry-hex"><polygon class="hex hex--tier-1" points="200,230 260,265 260,335 200,370 140,335 140,265"/><text class="hex-label" text-anchor="middle" x="200" y="293">Higher</text><text class="hex-label" text-anchor="middle" x="200" y="310">Education</text></g>
           <g class="industry-hex industry-hex--center"><polygon class="hex hex--tier-1" points="320,230 380,265 380,335 320,370 260,335 260,265"/><text class="hex-label" text-anchor="middle" x="320" y="293">Critical</text><text class="hex-label" text-anchor="middle" x="320" y="310">Infrastructure</text></g>
           <g class="industry-hex"><polygon class="hex hex--tier-1" points="440,230 500,265 500,335 440,370 380,335 380,265"/><text class="hex-label" text-anchor="middle" x="440" y="305">Industrial</text></g>
-          <g class="industry-hex"><polygon class="hex hex--tier-2" points="560,230 620,265 620,335 560,370 500,335 500,265"/><text class="hex-label" text-anchor="middle" x="560" y="293">Self Storage</text><text class="hex-label" text-anchor="middle" x="560" y="310">and Logistics</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="560,230 620,265 620,335 560,370 500,335 500,265"/><text class="hex-label" text-anchor="middle" x="560" y="293">Self Storage</text><text class="hex-label" text-anchor="middle" x="560" y="310">&amp; Logistics</text></g>
           <g class="industry-hex"><polygon class="hex hex--tier-2" points="140,335 200,370 200,440 140,475 80,440 80,370"/><text class="hex-label" text-anchor="middle" x="140" y="398">Sports</text><text class="hex-label" text-anchor="middle" x="140" y="415">&amp; Venues</text></g>
           <g class="industry-hex"><polygon class="hex hex--tier-1" points="260,335 320,370 320,440 260,475 200,440 200,370"/><text class="hex-label" text-anchor="middle" x="260" y="398">Data</text><text class="hex-label" text-anchor="middle" x="260" y="415">Centers</text></g>
           <g class="industry-hex"><polygon class="hex hex--tier-1" points="380,335 440,370 440,440 380,475 320,440 320,370"/><text class="hex-label" text-anchor="middle" x="380" y="398">Advanced</text><text class="hex-label" text-anchor="middle" x="380" y="415">Manufacturing</text></g>
@@ -2231,6 +2270,29 @@ small, .text-small { font-size: var(--text-sm); }
         </svg>
         <!-- industries-grid:end -->
 
+      </div>
+    </section>
+
+    <!-- 6a. SERVICE AREA — map of NC + SC coverage with key cities. -->
+    <section class="section section--soft" id="service-area" aria-labelledby="service-area-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Where We Serve</span>
+          <h2 id="service-area-heading">Across North &amp; South Carolina.</h2>
+          <p class="lead">Trucks roll out of our Charlotte HQ daily across the Carolinas — from the foothills to the coast. We have an especially deep footprint in metro Charlotte and along the I-85 corridor.</p>
+        </div>
+        <div class="service-area-map">
+          <img src="shared/img/maps/ctc-service-area.png" alt="Map of Charlotte Temperature Controls service area covering North and South Carolina, marking Charlotte, Hickory, Salisbury, Gastonia, Rock Hill, Indian Land, and Columbia." loading="lazy" />
+        </div>
+        <ul class="service-area__cities" aria-label="Cities served">
+          <li>Charlotte</li>
+          <li>Hickory</li>
+          <li>Salisbury</li>
+          <li>Gastonia</li>
+          <li>Rock Hill</li>
+          <li>Indian Land</li>
+          <li>Columbia</li>
+        </ul>
       </div>
     </section>
 

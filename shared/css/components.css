@@ -339,14 +339,15 @@
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  /* CTC brand blue (#045D91) — was rgba(0,0,107,...) which carried over from
-     Starnes (#00006B) and felt off-brand. Using the literal logo blue makes
-     the header read as CTC at a glance. */
-  background: rgba(4, 93, 145, 0.92);
+  /* CTC deep navy (#023A5C — same as the footer). Harmonizes header + footer
+     into a single "navy bracket" around the cream content. The brighter logo
+     blue (#045D91) is reserved for accents (eyebrows, highlights, hover). */
+  background: rgba(2, 58, 92, 0.92);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  /* Border tinted to CTC sky (--color-primary-soft #7CB8DC) — was Starnes pale blue */
-  border-bottom: 1px solid rgba(124, 184, 220, 0.35);
+  /* Border tinted to the brighter brand blue at low alpha — a hairline accent
+     between header and content. */
+  border-bottom: 1px solid rgba(4, 93, 145, 0.45);
   height: var(--header-height);
   display: flex;
   align-items: center;
@@ -355,7 +356,7 @@
 
 .site-header.is-scrolled {
   box-shadow: 0 1px 0 rgba(0,0,0,0.4), var(--shadow-sm);
-  background: rgba(4, 93, 145, 0.97);
+  background: rgba(2, 58, 92, 0.97);
 }
 
 .site-header__inner {
@@ -456,11 +457,11 @@
   top: calc(100% + 6px);
   left: -8px;
   min-width: 240px;
-  /* CTC brand blue — matches the header it descends from. */
-  background: rgba(4, 93, 145, 0.97);
+  /* Deep navy — matches the header (and footer) it descends from. */
+  background: rgba(2, 58, 92, 0.97);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  border: 1px solid rgba(124, 184, 220, 0.35);
+  border: 1px solid rgba(4, 93, 145, 0.45);
   border-radius: var(--radius-md);
   padding: var(--space-2);
   box-shadow: var(--shadow-lg);
