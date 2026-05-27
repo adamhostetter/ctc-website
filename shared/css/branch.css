@@ -94,9 +94,12 @@
   font-weight: var(--weight-semibold);
   text-transform: uppercase;
   letter-spacing: var(--tracking-caps);
-  color: var(--color-accent);
+  /* Sage green from the CTC service-area map graphic — picks up the
+     brand's third color and provides high-contrast readability against
+     the navy hero overlay (the previous accent blue was getting lost). */
+  color: var(--color-map-green);
   margin-bottom: var(--space-4);
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
 }
 .branch-hero__title {
   font-family: var(--font-display);
