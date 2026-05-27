@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  CTC Branch Template (single-location variant)
+  ============================================================
+
+  Hydrated from config.json at the repo root by
+  scripts/build-branches.js. Mirrors the Starnes single-location
+  pattern but with CTC's controls/BAS-leaning content, a partner-
+  strip section for the Honeywell accreditation callout, and the
+  residential service entry removed (CTC is commercial-only).
+
+  Handlebars subset:
+    {{field}}, {{nested.field}}, {{this}}, {{../field}},
+    {{#each list}}...{{/each}}, {{#if field}}...{{/if}}
+
+  Build directives:
+    INLINE_CSS         tokens + base + components + branch
+    INLINE_LOGO_WHITE  shared/img/logos/ctc-hero-white.svg
+    INLINE_BRANCH_JS   shared/js/site.js
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{name}}</title>
+  <meta name="description" content="{{name}} — Honeywell-accredited building automation, commercial HVAC, planned maintenance, 24/7 emergency service, and project support across North and South Carolina. {{address.city}}, {{address.state}}. Since 1988." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{name}}" />
+  <meta property="og:description" content="Building automation and HVAC service across the Carolinas since 1988." />
+  <meta property="og:url" content="{{canonicalUrl}}" />
+
+  <link rel="icon" type="image/svg+xml" href="shared/img/logos/ctc-favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- LocalBusiness JSON-LD for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "{{name}}",
+    "image": "{{heroPhoto}}",
+    "telephone": "{{phoneE164}}",
+    "email": "{{email}}",
+    "url": "{{canonicalUrl}}",
+    "foundingDate": "1988",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{address.street}}",
+      "addressLocality": "{{address.city}}",
+      "addressRegion": "{{address.state}}",
+      "postalCode": "{{address.zip}}",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": {{mapCoords.lat}},
+      "longitude": {{mapCoords.lng}}
+    },
+    "openingHours": "Mo-Fr 08:00-17:00",
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "FirstCall Mechanical",
+      "url": "https://firstcallmechanical.com"
+    }
+  }
+  </script>
+
+  <style>
+    /* {{INLINE_CSS}} */
+
+    /* Partner strip — Honeywell accreditation callout */
+    .partner-strip {
+      background: var(--color-primary-dark);
+      color: var(--color-text-on-dark);
+      padding: var(--space-7) 0;
+    }
+    .partner-strip__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      align-items: center;
+      text-align: center;
+    }
+    .partner-strip__eyebrow {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-caps);
+      text-transform: uppercase;
+      color: var(--color-accent-light);
+    }
+    .partner-strip__heading {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-tight);
+      line-height: var(--leading-tight);
+      margin: 0;
+      max-width: 56ch;
+    }
+    .partner-strip__body {
+      font-size: var(--text-lg);
+      line-height: var(--leading-normal);
+      color: var(--color-text-on-dark);
+      opacity: 0.9;
+      max-width: 64ch;
+      margin: var(--space-2) 0 0;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="site-header__inner">
+      <a class="site-header__logo" href="index.html" aria-label="{{name}}, home">
+        <!-- {{INLINE_LOGO_WHITE}} — CTC hero mark (white) -->
+        <span class="site-header__tagline">Since 1988</span>
+      </a>
+
+      <nav class="site-nav" data-site-nav aria-label="Primary">
+        <div class="site-nav__dropdown-wrap" data-dropdown>
+          <button type="button" class="site-nav__link site-nav__dropdown-toggle"
+                  aria-haspopup="true" aria-expanded="false" data-dropdown-toggle>
+            Services
+            <svg class="site-nav__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="site-nav__dropdown" data-dropdown-menu>
+            <a class="site-nav__dropdown-link" href="services/commercial-hvac.html">Commercial HVAC &amp; Controls</a>
+            <a class="site-nav__dropdown-link" href="services/planned-maintenance.html">Planned Maintenance</a>
+            <a class="site-nav__dropdown-link" href="services/emergency.html">Emergency Services</a>
+            <a class="site-nav__dropdown-link" href="services/project-support.html">Project Support</a>
+          </div>
+        </div>
+
+        <a class="site-nav__link" href="https://firstcallmechanical.com/locations.html" target="_blank" rel="noopener">FirstCall Locations</a>
+        <a class="site-nav__link" href="{{careersUrl}}" target="_blank" rel="noopener">Careers</a>
+        <a class="site-nav__link" href="#contact">Contact</a>
+      </nav>
+
+      <div class="site-header__cta">
+        <a class="btn btn--primary btn--sm hide-mobile" href="tel:{{phoneE164}}">Call {{phone}}</a>
+        <button class="menu-toggle" data-menu-toggle aria-label="Open menu" aria-expanded="false">
+          <span class="menu-toggle__bars" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. HERO — video OR photo, full-bleed background with overlaid text -->
+    <section class="branch-hero">
+      {{#if heroVideo}}
+      <video
+        class="branch-hero__video"
+        data-hero-video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source src="{{heroVideo}}" type="video/mp4" />
+      </video>
+      {{/if}}
+
+      {{#if heroPhoto}}
+      <div class="branch-hero__photo-wrap" data-hero-parallax>
+        <img class="branch-hero__photo-bg" src="{{heroPhoto}}" alt="" aria-hidden="true" loading="eager" fetchpriority="high" />
+      </div>
+      {{/if}}
+
+      <div class="container">
+        <div class="branch-hero__inner">
+          <span class="branch-hero__eyebrow">{{name}} · {{address.city}}, {{address.state}} · Since 1988</span>
+          <h1 class="branch-hero__title">{{heroHeading}}</h1>
+          <p class="branch-hero__lede">{{heroParagraph}}</p>
+          <div class="branch-hero__cta">
+            <a class="btn btn--primary btn--lg" href="tel:{{phoneE164}}">Call {{phone}}</a>
+            <a class="btn btn--outline btn--lg" href="#contact">Request Service</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PARTNER STRIP — Honeywell accreditation callout
+         CTC-specific section: the Honeywell partnership is a core
+         identity signal carried over from the legacy site, so we
+         surface it prominently between the hero and the services grid. -->
+    {{#if partners}}
+    <section class="partner-strip" aria-labelledby="partner-heading">
+      <div class="container partner-strip__inner">
+        <span class="partner-strip__eyebrow">{{partners.eyebrow}}</span>
+        <h2 id="partner-heading" class="partner-strip__heading">{{partners.heading}}</h2>
+        <p class="partner-strip__body">{{partners.body}}</p>
+      </div>
+    </section>
+    {{/if}}
+
+    <!-- 3. PHOTO STRIP -->
+    {{#if photoStrip}}
+    <section class="photo-strip-section">
+      <div class="container">
+        <div class="photo-strip">
+          {{#each photoStrip}}
+          <div class="photo-strip__item"><img src="{{this}}" alt="{{../address.city}} jobsite photo" loading="lazy" /></div>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+    {{/if}}
+
+    <!-- 4. OUR CAPABILITIES -->
+    <section class="section" id="services" aria-labelledby="caps-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Our Capabilities</span>
+          <h2 id="caps-heading">Building automation. HVAC. Service that backs it up.</h2>
+          <p class="lead">For more than three decades our Charlotte team has integrated, installed, and serviced the building automation and mechanical systems behind Carolinas commercial facilities — with the breadth of a national platform and the responsiveness of a local crew.</p>
+        </div>
+
+        <div class="capabilities">
+          {{#each services}}
+          <a class="capability" id="service-{{key}}" href="services/{{slug}}.html">
+            <span class="capability__icon" aria-hidden="true">
+              <!-- {{INLINE_SERVICE_ICON key}} — looks up SVG by service key -->
+            </span>
+            <h4 class="capability__title">{{title}}</h4>
+            <p class="capability__body">{{body}}</p>
+            <span class="capability__cta" aria-hidden="true">Learn more →</span>
+          </a>
+          {{/each}}
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. TECHNICAL EXPERIENCE -->
+    <section class="section section--soft" aria-labelledby="tech-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Technical Experience</span>
+          <h2 id="tech-heading">Systems and platforms we work on every day.</h2>
+          <p class="lead">A representative list of the building automation platforms, controls, and mechanical equipment our Charlotte team services — across North and South Carolina.</p>
+        </div>
+
+        <ul class="tech-list">
+          {{#each technicalExperience}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. INDUSTRIES WE SERVE -->
+    <section class="section" aria-labelledby="markets-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Industries We Serve</span>
+          <h2 id="markets-heading">Built for the buildings that matter.</h2>
+          <p class="lead">{{industriesLead}}</p>
+        </div>
+
+        <!-- industries-grid:start variant=main -->
+        <svg class="industries-honeycomb" viewBox="0 0 640 600" role="img" aria-label="Industries we serve">
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="200,20 260,55 260,125 200,160 140,125 140,55"/><text class="hex-label" text-anchor="middle" x="200" y="83">Government</text><text class="hex-label" text-anchor="middle" x="200" y="100">&amp; Federal</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="320,20 380,55 380,125 320,160 260,125 260,55"/><text class="hex-label" text-anchor="middle" x="320" y="83">Commercial</text><text class="hex-label" text-anchor="middle" x="320" y="100">Office Space</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="440,20 500,55 500,125 440,160 380,125 380,55"/><text class="hex-label" text-anchor="middle" x="440" y="95">K&ndash;12 Education</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="140,125 200,160 200,230 140,265 80,230 80,160"/><text class="hex-label" text-anchor="middle" x="140" y="200">Public Sector</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-1" points="260,125 320,160 320,230 260,265 200,230 200,160"/><text class="hex-label" text-anchor="middle" x="260" y="200">Healthcare</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-1" points="380,125 440,160 440,230 380,265 320,230 320,160"/><text class="hex-label" text-anchor="middle" x="380" y="188">Life Sciences</text><text class="hex-label" text-anchor="middle" x="380" y="205">&amp; Pharma</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="500,125 560,160 560,230 500,265 440,230 440,160"/><text class="hex-label" text-anchor="middle" x="500" y="200">Hospitality</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="80,230 140,265 140,335 80,370 20,335 20,265"/><text class="hex-label" text-anchor="middle" x="80" y="305">Automotive</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-1" points="200,230 260,265 260,335 200,370 140,335 140,265"/><text class="hex-label" text-anchor="middle" x="200" y="293">Higher</text><text class="hex-label" text-anchor="middle" x="200" y="310">Education</text></g>
+          <g class="industry-hex industry-hex--center"><polygon class="hex hex--tier-1" points="320,230 380,265 380,335 320,370 260,335 260,265"/><text class="hex-label" text-anchor="middle" x="320" y="293">Critical</text><text class="hex-label" text-anchor="middle" x="320" y="310">Infrastructure</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-1" points="440,230 500,265 500,335 440,370 380,335 380,265"/><text class="hex-label" text-anchor="middle" x="440" y="305">Industrial</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="560,230 620,265 620,335 560,370 500,335 500,265"/><text class="hex-label" text-anchor="middle" x="560" y="293">Self Storage</text><text class="hex-label" text-anchor="middle" x="560" y="310">and Logistics</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="140,335 200,370 200,440 140,475 80,440 80,370"/><text class="hex-label" text-anchor="middle" x="140" y="398">Sports</text><text class="hex-label" text-anchor="middle" x="140" y="415">&amp; Venues</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-1" points="260,335 320,370 320,440 260,475 200,440 200,370"/><text class="hex-label" text-anchor="middle" x="260" y="398">Data</text><text class="hex-label" text-anchor="middle" x="260" y="415">Centers</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-1" points="380,335 440,370 440,440 380,475 320,440 320,370"/><text class="hex-label" text-anchor="middle" x="380" y="398">Advanced</text><text class="hex-label" text-anchor="middle" x="380" y="415">Manufacturing</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="500,335 560,370 560,440 500,475 440,440 440,370"/><text class="hex-label" text-anchor="middle" x="500" y="410">Office</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="200,440 260,475 260,545 200,580 140,545 140,475"/><text class="hex-label" text-anchor="middle" x="200" y="515">Senior Living</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="320,440 380,475 380,545 320,580 260,545 260,475"/><text class="hex-label" text-anchor="middle" x="320" y="515">Retail</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="440,440 500,475 500,545 440,580 380,545 380,475"/><text class="hex-label" text-anchor="middle" x="440" y="515">Multifamily</text></g>
+        </svg>
+        <!-- industries-grid:end -->
+
+      </div>
+    </section>
+
+    <!-- 7. A FIRSTCALL COMPANY -->
+    <section class="section firstcall-block" aria-labelledby="firstcall-heading">
+      <div class="container firstcall-block__inner">
+        <span class="eyebrow">A FirstCall Company</span>
+        <h2 id="firstcall-heading">Carolinas local. National platform.</h2>
+        <p class="lead">
+          {{name}} has served the Carolinas since 1988. Today we're part of FirstCall Mechanical —
+          a network of leading regional commercial service companies. That means the local team and reputation
+          you know, with access to the engineering depth, parts pipeline, and on-call surge capacity of a
+          national platform. Local stays local. The national platform multiplies what we can do.
+        </p>
+        <a href="{{parentLink}}" class="link-arrow" style="margin-top:var(--space-5); display:inline-flex">Learn about FirstCall Mechanical</a>
+      </div>
+    </section>
+
+    <!-- 8. CAREERS -->
+    <section class="section section--soft" id="careers" aria-labelledby="careers-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Careers</span>
+          <h2 id="careers-heading">Join the CTC team.</h2>
+          <p class="lead">We're hiring across the Carolinas — controls technicians, BAS programmers, commercial HVAC service techs, installers, and project managers. If you want to do real work for real customers (the kind that remember your name), we want to talk.</p>
+        </div>
+        <div class="careers-cta">
+          <a class="btn btn--primary btn--lg" href="{{careersUrl}}" target="_blank" rel="noopener">View Open Positions</a>
+          <a class="btn btn--outline btn--lg" href="#contact">Ask a Recruiter</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. SERVICE FORM -->
+    <section class="section section--tinted" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">How Can We Help?</span>
+          <h2 id="contact-heading">At {{name}}, we're dedicated to helping.</h2>
+          <p class="lead">Tell us about your facility and we'll get back to you within one business day. For emergencies, call us — we're on call 24/7 at <a href="tel:{{phoneEmergencyE164}}" style="font-weight: 600">{{phoneEmergency}}</a>.</p>
+        </div>
+
+        <div class="contact-row">
+          <form class="service-form" action="/api/contact" method="POST" data-form-handler novalidate>
+            <input type="hidden" name="_form" value="ctc-contact" />
+            <input type="hidden" name="_ts" value="" />
+            <input type="text" name="_honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" />
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="form-label" for="f-name">Full name <span class="required">*</span></label>
+                <input class="form-input" id="f-name" name="name" type="text" required autocomplete="name" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="f-company">Company / Organization</label>
+                <input class="form-input" id="f-company" name="company" type="text" autocomplete="organization" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="f-email">Email <span class="required">*</span></label>
+                <input class="form-input" id="f-email" name="email" type="email" required autocomplete="email" />
+              </div>
+              <div class="form-field">
+                <label class="form-label" for="f-phone">Phone</label>
+                <input class="form-input" id="f-phone" name="phone" type="tel" autocomplete="tel" />
+              </div>
+              <div class="form-field form-field--full">
+                <label class="form-label" for="f-addr">Service address</label>
+                <input class="form-input" id="f-addr" name="address" type="text" placeholder="Street, city" autocomplete="street-address" />
+              </div>
+              <div class="form-field form-field--full">
+                <label class="form-label" for="f-service">Service needed</label>
+                <select class="form-select" id="f-service" name="service">
+                  <option value="controls">Building automation / controls</option>
+                  <option value="commercial">Commercial HVAC</option>
+                  <option value="planned">Planned maintenance</option>
+                  <option value="emergency">Emergency response</option>
+                  <option value="project">Project / retrofit / upgrade</option>
+                  <option value="other">Something else</option>
+                </select>
+              </div>
+              <div class="form-field form-field--full">
+                <label class="form-label" for="f-msg">Tell us what you need</label>
+                <textarea class="form-textarea" id="f-msg" name="message" placeholder="Building type, equipment, what's going on..."></textarea>
+                <span class="form-help">Including equipment model numbers or BAS platform (Niagara, WEBs, etc.) helps us send the right tech.</span>
+              </div>
+            </div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAADTM6_tBRR1y4uuE" data-theme="auto" style="margin-top:1rem"></div>
+            <div data-form-error role="alert" hidden style="margin-top:1rem;padding:0.75rem 1rem;background:#FEF2F2;border:1px solid #FCA5A5;color:#7F1D1D;border-radius:8px;font-size:0.875rem"></div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary btn--lg">Request Service</button>
+              <span class="form-help">Or call <a href="tel:{{phoneE164}}" style="font-weight: 600">{{phone}}</a> for office hours, <a href="tel:{{phoneEmergencyE164}}" style="font-weight: 600">{{phoneEmergency}}</a> for 24/7 emergency.</span>
+            </div>
+          </form>
+
+          <aside class="contact-card" aria-label="Branch contact information">
+            <h3>{{name}}</h3>
+            <div class="contact-card__row">
+              <div class="contact-card__label">Address</div>
+              <div class="contact-card__value">
+                {{address.street}}<br>
+                {{address.city}}, {{address.state}} {{address.zip}}
+              </div>
+            </div>
+            <div class="contact-card__row">
+              <div class="contact-card__label">Office</div>
+              <div class="contact-card__value"><a href="tel:{{phoneE164}}">{{phone}}</a></div>
+            </div>
+            <div class="contact-card__row">
+              <div class="contact-card__label">24/7</div>
+              <div class="contact-card__value"><a href="tel:{{phoneEmergencyE164}}">{{phoneEmergency}}</a></div>
+            </div>
+            <div class="contact-card__row">
+              <div class="contact-card__label">Email</div>
+              <div class="contact-card__value"><a href="mailto:{{email}}">{{email}}</a></div>
+            </div>
+            <div class="contact-card__row">
+              <div class="contact-card__label">Hours</div>
+              <div class="contact-card__value">
+                Mon–Fri 8:00 a.m. – 5:00 p.m.<br>
+                <strong style="color: var(--color-accent);">24 / 7 emergency response</strong>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__grid">
+        <div class="site-footer__brand">
+          <!-- {{INLINE_LOGO_WHITE}} — CTC hero mark in white -->
+          <p>{{name}} — Honeywell-accredited building automation, commercial HVAC, planned maintenance, and 24/7 emergency response across North and South Carolina since 1988.</p>
+        </div>
+        <div>
+          <div class="site-footer__heading">Services</div>
+          <ul class="site-footer__list">
+            <li><a href="services/commercial-hvac.html">Commercial HVAC &amp; Controls</a></li>
+            <li><a href="services/planned-maintenance.html">Planned Maintenance</a></li>
+            <li><a href="services/emergency.html">Emergency Services</a></li>
+            <li><a href="services/project-support.html">Project Support</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="site-footer__heading">Charlotte HQ</div>
+          <ul class="site-footer__list">
+            <li><span>{{address.street}}</span></li>
+            <li><span>{{address.city}}, {{address.state}} {{address.zip}}</span></li>
+            <li><a href="tel:{{phoneE164}}">{{phone}}</a></li>
+            <li><a href="tel:{{phoneEmergencyE164}}">24/7: {{phoneEmergency}}</a></li>
+            <li><a href="mailto:{{email}}">{{email}}</a></li>
+          </ul>
+          {{#each stateLicenses}}
+          <p class="site-footer__license">{{body}} {{number}}</p>
+          {{/each}}
+        </div>
+        <div>
+          <div class="site-footer__heading">Connect</div>
+          <ul class="site-footer__list">
+            <li><a href="{{careersUrl}}" target="_blank" rel="noopener">Careers</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="https://www.linkedin.com/company/charlotte-temperature-controls" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="{{parentLink}}" target="_blank" rel="noopener">FirstCall Mechanical</a></li>
+            <li><a href="{{parentLink}}/locations.html" target="_blank" rel="noopener">FirstCall Locations</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <span>&copy; {{copyrightYear}} Charlotte Temperature Controls, a FirstCall company. All rights reserved.</span>
+        <span>Licensed &amp; Insured · Serving NC &amp; SC</span>
+        <span><a href="#">Privacy</a> &middot; <a href="#">Terms</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* {{INLINE_BRANCH_JS}} — mobile-nav toggle, header scroll, dropdowns, hero video, parallax */
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script src="/assets/js/form-handler.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+/**
+ * Cloudflare Pages Function — Starnes Inc. (starnesinc.com)
+ *
+ * Two responsibilities:
+ *   1. Form submissions — POST /api/contact accepts form data, looks up
+ *      recipients by the `_form` hidden field, forwards via the Resend API.
+ *   2. Pass-through asset serving for everything else.
+ *
+ * Anti-spam (five layers, cheapest first; any match → silent ok so bots
+ * can't tell the submission was rejected):
+ *   1. Origin allowlist  — reject POSTs not coming from starnesinc.com
+ *   2. Honeypot          — hidden _honeypot input filled = bot
+ *   3. Min-submit-time   — JS writes _ts on page load; reject if elapsed < 3s
+ *   4. Cloudflare Turnstile — siteverify the cf-turnstile-response token
+ *   5. Non-Latin script  — reject submissions whose name/company/message
+ *                          contain Cyrillic/CJK/Arabic/etc. (we operate in
+ *                          the US in English + Spanish only). Latin-script
+ *                          accented characters (ñ, á, é) pass through.
+ *
+ * Secrets — set in Cloudflare Pages → Settings → Variables and Secrets:
+ *   RESEND_API_KEY         (re-use the same key as the FCG/FCM project)
+ *   TURNSTILE_SECRET_KEY   (per-site widget secret from dash.cloudflare.com/turnstile)
+ */
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/api/contact" && request.method === "POST") {
+      return handleContactForm(request, env);
+    }
+
+    return env.ASSETS.fetch(request);
+  },
+};
+
+// =============================================================================
+// Form-submission handler
+// =============================================================================
+
+const FORM_ROUTING = {
+  "starnes-contact": ["service@starnesinc.com", "Adam.Hostetter@firstcallgroup.com"],
+};
+
+const FORM_LABELS = {
+  "starnes-contact": "Starnes Inc. contact form",
+};
+
+const FROM_EMAIL = "Starnes Inc. <noreply@firstcallgroup.com>";
+
+// Hostnames a contact-form POST is allowed to come from. Add a preview .pages.dev
+// entry if you want to test forms on Cloudflare preview deploys.
+const ALLOWED_ORIGINS = new Set([
+  "https://starnesinc.com",
+  "https://www.starnesinc.com",
+  "https://starnes-inc.pages.dev",
+]);
+
+// Minimum time (ms) between page-load timestamp (_ts) and submission.
+// Humans take at least a few seconds; bots that bypass JS won't set _ts at all.
+const MIN_SUBMIT_MS = 3000;
+
+async function handleContactForm(request, env) {
+  try {
+    // Layer 1 — Origin allowlist. Direct API hammering won't carry the right header.
+    const origin = request.headers.get("origin") || "";
+    if (!ALLOWED_ORIGINS.has(origin)) {
+      console.warn("Origin rejected:", origin);
+      return silentOk();
+    }
+
+    const ct = request.headers.get("content-type") || "";
+    const data = ct.includes("application/json")
+      ? await request.json()
+      : Object.fromEntries((await request.formData()).entries());
+
+    // Layer 2 — Honeypot. Hidden field; humans never see it, bots fill everything.
+    if (data._honeypot) {
+      console.warn("Honeypot triggered");
+      return silentOk();
+    }
+
+    // Layer 3 — Min-submit-time. _ts is set by form-handler.js on DOMContentLoaded;
+    // bots that POST directly (or auto-fill in <3s) won't have a valid recent value.
+    const ts = parseInt(data._ts, 10);
+    if (!Number.isFinite(ts) || Date.now() - ts < MIN_SUBMIT_MS) {
+      console.warn("Time check failed: _ts=", data._ts, "elapsed=", Date.now() - ts);
+      return silentOk();
+    }
+
+    // Layer 4 — Cloudflare Turnstile. Verify the token issued by the widget.
+    const turnstileToken = data["cf-turnstile-response"] || "";
+    const turnstileOk = await verifyTurnstile(turnstileToken, request, env);
+    if (!turnstileOk) {
+      console.warn("Turnstile verify failed");
+      return silentOk();
+    }
+
+    // Layer 5 — Non-Latin script reject. We operate in English + Spanish
+    // (both Latin script). Submissions whose user-supplied text contains
+    // Cyrillic / CJK / Arabic / Devanagari / etc. are almost always spam.
+    const userText = [data.name, data.company, data.address, data.message]
+      .filter(s => typeof s === "string")
+      .join(" ");
+    if (isLikelyForeignScript(userText)) {
+      console.warn("Non-Latin script rejected");
+      return silentOk();
+    }
+
+    const formId = String(data._form || "").trim();
+    const to = FORM_ROUTING[formId];
+    if (!to) {
+      return jsonResp({ error: `Unknown form id: ${formId}` }, 400);
+    }
+
+    const subject = buildSubject(formId, data);
+    const html = renderEmailHTML(formId, data);
+    const text = renderEmailText(formId, data);
+    const replyTo =
+      typeof data.email === "string" && /@/.test(data.email) ? data.email : undefined;
+
+    const resp = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: FROM_EMAIL,
+        to,
+        reply_to: replyTo,
+        subject,
+        html,
+        text,
+      }),
+    });
+
+    if (!resp.ok) {
+      const errText = await resp.text();
+      console.error("Resend failure:", resp.status, errText);
+      return jsonResp({ error: "Email delivery failed. Please try again or contact us directly." }, 502);
+    }
+
+    return jsonResp({ ok: true });
+  } catch (e) {
+    console.error("Form handler error:", e && e.stack || e);
+    return jsonResp({ error: "Server error. Please try again." }, 500);
+  }
+}
+
+async function verifyTurnstile(token, request, env) {
+  if (!token || !env.TURNSTILE_SECRET_KEY) return false;
+  const body = new URLSearchParams();
+  body.append("secret", env.TURNSTILE_SECRET_KEY);
+  body.append("response", token);
+  // Optional: pass the user's IP so Cloudflare can score it.
+  const ip = request.headers.get("cf-connecting-ip");
+  if (ip) body.append("remoteip", ip);
+
+  try {
+    const resp = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body,
+    });
+    const json = await resp.json();
+    return !!json.success;
+  } catch (e) {
+    console.error("Turnstile siteverify error:", e);
+    return false;
+  }
+}
+
+function silentOk() {
+  // Returned for ALL spam-filter rejections so bots can't differentiate a
+  // dropped submission from a successful one.
+  return jsonResp({ ok: true });
+}
+
+// True if `text` contains more than a few characters from non-Latin scripts
+// commonly used by foreign-language spam (Cyrillic, Arabic, Hebrew,
+// Devanagari, CJK, Hangul, Thai). Allows Latin Extended (accents, ñ, á, é,
+// ü, etc.) so English and Spanish pass through cleanly. Threshold > 3 chars
+// to tolerate the occasional pasted symbol from a copy/paste.
+function isLikelyForeignScript(text) {
+  if (!text || typeof text !== "string") return false;
+  const nonLatin = text.match(
+    /[Ѐ-ӿԀ-ԯ֐-׿؀-ۿ܀-ݏऀ-ॿ฀-๿　-鿿가-힯]/g
+  );
+  return !!nonLatin && nonLatin.length > 3;
+}
+
+function jsonResp(body, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "content-type": "application/json; charset=utf-8" },
+  });
+}
+
+function buildSubject(formId, data) {
+  const label = FORM_LABELS[formId] || formId;
+  const name = typeof data.name === "string" && data.name.trim() ? ` — ${data.name.trim()}` : "";
+  return `[Web] ${label}${name}`;
+}
+
+function renderEmailHTML(formId, data) {
+  const rows = Object.entries(data)
+    .filter(([k]) => !k.startsWith("_") && k !== "cf-turnstile-response")
+    .map(([k, v]) => `
+      <tr>
+        <td style="padding:6px 16px 6px 0; vertical-align:top; color:#5a6371; font-weight:600; white-space:nowrap">${esc(prettyLabel(k))}</td>
+        <td style="padding:6px 0; vertical-align:top; white-space:pre-wrap; word-break:break-word">${esc(String(v ?? ""))}</td>
+      </tr>`).join("");
+  const label = FORM_LABELS[formId] || formId;
+  return `<!DOCTYPE html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a2331;max-width:640px;margin:0 auto;padding:24px;background:#fcfbf7">
+<div style="background:#fff;border:1px solid #e5e1d2;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(15,42,31,0.06)">
+<h2 style="margin:0 0 4px 0;font-weight:700">New form submission</h2>
+<p style="color:#5a6371;margin:0 0 16px 0;font-size:13px">${esc(label)} &mdash; <code style="background:#f4f2ea;padding:2px 6px;border-radius:4px">${esc(formId)}</code></p>
+<table style="border-collapse:collapse;border-top:1px solid #e5e1d2;padding-top:12px;width:100%;font-size:14px">${rows}</table>
+</div>
+</body></html>`;
+}
+
+function renderEmailText(formId, data) {
+  const label = FORM_LABELS[formId] || formId;
+  const lines = [`New form submission`, label, `(${formId})`, ""];
+  for (const [k, v] of Object.entries(data)) {
+    if (k.startsWith("_") || k === "cf-turnstile-response") continue;
+    lines.push(`${prettyLabel(k)}: ${v}`);
+  }
+  return lines.join("\n");
+}
+
+function prettyLabel(k) {
+  return k.replace(/[-_]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+}

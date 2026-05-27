@@ -1,0 +1,186 @@
+/* ============================================================
+   CTC (Charlotte Temperature Controls) Design Tokens
+
+   Brand palette is built around CTC's own logo colors — a single
+   strong corporate blue plus mid-gray and near-black — rather than
+   the FirstCall Mechanical green family used by STR / C2H or the
+   royal-blue + red used by Starnes. CTC's identity is monochromatic
+   (one blue, no contrasting accent), so the design leans into a
+   confident single-color system rather than introducing a foreign
+   accent hue.
+
+   Logo source colors (CTC NEW LOGO.svg):
+     #045D91  brand blue (CTC mark + "Charlotte" / "Controls" wordmark)
+     #595A5C  mid gray ("Temperature" wordmark)
+     #010101  near-black (descriptor line)
+
+   Complementary choices:
+     - A deeper navy (#023A5C) for dark surfaces (header / footer / CTA
+       bands). Same hue family as the brand blue, just darker — keeps
+       the monochromatic feel.
+     - A pale sky tint (#7CB8DC) for eyebrow / soft hover on dark
+       surfaces. Lighter sibling of the brand blue.
+     - Because CTC has no contrasting accent in the logo, primary CTAs
+       and "accent" features use the brand blue itself rather than a
+       foreign hue. Focus rings + danger states use a soft amber to
+       provide enough contrast against the all-blue UI.
+     - Cream page bg (#FCFBF7) kept from the shared template — works
+       with any brand palette and gives high contrast for dark text.
+   ============================================================ */
+
+:root {
+  /* --------------------------------------------------------
+     COLOR — Brand: CTC blue (single-color system)
+     -------------------------------------------------------- */
+  --color-primary:        #045D91;  /* CTC brand blue — logo primary */
+  --color-primary-dark:   #023A5C;  /* Deep navy — header / footer */
+  --color-primary-mid:    #1276B0;  /* Lifted blue — cards on dark */
+  --color-primary-soft:   #7CB8DC;  /* Pale sky — borders, soft fills */
+
+  /* Accent — CTC has no contrasting accent in the logo, so we lean
+     into the brand blue itself. CTAs use --color-primary directly.
+     --color-accent maps to the same blue so any template code that
+     references the accent token keeps brand consistency. */
+  --color-accent:         #045D91;  /* Brand blue — primary CTAs */
+  --color-accent-dark:    #023A5C;  /* Hover state — navy */
+  --color-accent-light:   #7CB8DC;  /* Sky blue — eyebrows + hover on dark
+                                       (same hue family as primary — keeps
+                                       the monochromatic identity intact) */
+
+  /* --------------------------------------------------------
+     COLOR — Surfaces (cream content, navy brackets)
+     -------------------------------------------------------- */
+  --color-bg:             #FCFBF7;  /* warm cream page bg */
+  --color-bg-soft:        #F4F2EA;  /* alt section bands */
+  --color-bg-section:     #EDE9DC;  /* tinted bands */
+  --color-bg-dark:        #023A5C;  /* deepest — footer + CTA bands */
+  --color-bg-card:        #FFFFFF;  /* lifted cards */
+
+  --color-text:           #1A1A1A;  /* matches CTC logo near-black */
+  --color-text-muted:     #595A5C;  /* secondary copy — matches logo gray */
+  --color-text-light:     #8A93A1;  /* tertiary, meta */
+  --color-text-on-dark:   #F2EFE3;  /* warm cream on dark surfaces */
+  --color-text-on-primary:#FFFFFF;
+
+  --color-border:         #E5E1D2;
+  --color-border-strong:  #C9C7B7;
+  --color-border-dark:    #023A5C;
+
+  /* --------------------------------------------------------
+     INDUSTRIES-GRID TIER TOKENS
+     Recolored to the CTC blue family — single-hue gradient
+     across the three tiers.
+     -------------------------------------------------------- */
+  --fc-tier-1:        #045D91;   /* Specialty Focus — CTC brand blue */
+  --fc-tier-2:        #4A92BD;   /* Deep Expertise — mid blue */
+  --fc-tier-3:        #BFD9EA;   /* Trusted Partner — pale blue */
+  --fc-text-light:    #FFFFFF;
+  --fc-text-dark:     #045D91;
+
+  /* --------------------------------------------------------
+     COLOR — Semantic
+     -------------------------------------------------------- */
+  --color-success:        #16A34A;
+  --color-warning:        #B8861A;
+  --color-danger:         #B45309;  /* amber — gives contrast against the
+                                       all-blue UI; pure red would clash */
+  --color-info:           #7CB8DC;
+
+  /* --------------------------------------------------------
+     TYPOGRAPHY — unchanged from STR/C2H/Starnes
+     -------------------------------------------------------- */
+  --font-display: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-xs:    0.75rem;
+  --text-sm:    0.875rem;
+  --text-base:  1rem;
+  --text-lg:    1.125rem;
+  --text-xl:    1.25rem;
+  --text-2xl:   1.5rem;
+  --text-3xl:   1.875rem;
+  --text-4xl:   2.25rem;
+  --text-5xl:   3rem;
+  --text-6xl:   3.75rem;
+  --text-7xl:   4.5rem;
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-extrabold:800;
+
+  --leading-tight:   1.15;
+  --leading-snug:    1.3;
+  --leading-normal:  1.55;
+  --leading-relaxed: 1.7;
+
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.02em;
+  --tracking-caps:   0.08em;
+
+  /* SPACING — unchanged */
+  --space-1:   0.25rem;
+  --space-2:   0.5rem;
+  --space-3:   0.75rem;
+  --space-4:   1rem;
+  --space-5:   1.5rem;
+  --space-6:   2rem;
+  --space-7:   3rem;
+  --space-8:   4rem;
+  --space-9:   6rem;
+  --space-10:  8rem;
+  --space-11: 10rem;
+
+  /* LAYOUT — unchanged */
+  --container-sm:  640px;
+  --container-md:  768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1600px;
+  --container-content: 1440px;
+
+  --header-height: 80px;
+  --header-height-mobile: 64px;
+  --pad-x: clamp(1.25rem, 4vw, 3rem);
+
+  /* RADII */
+  --radius-none: 0;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-pill: 999px;
+
+  /* SHADOWS — tinted to CTC navy family */
+  --shadow-xs: 0 1px 2px rgba(2, 58, 92, 0.05);
+  --shadow-sm: 0 1px 3px rgba(2, 58, 92, 0.08), 0 1px 2px rgba(2, 58, 92, 0.05);
+  --shadow-md: 0 4px 12px rgba(2, 58, 92, 0.10), 0 2px 4px rgba(2, 58, 92, 0.05);
+  --shadow-lg: 0 12px 32px rgba(2, 58, 92, 0.12), 0 4px 8px rgba(2, 58, 92, 0.05);
+  --shadow-xl: 0 24px 48px rgba(2, 58, 92, 0.16), 0 8px 16px rgba(2, 58, 92, 0.07);
+
+  /* MOTION */
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:  cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:   150ms;
+  --duration-base:   200ms;
+  --duration-slow:   320ms;
+
+  /* Z-INDEX */
+  --z-base:     1;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-header:   300;
+  --z-overlay:  400;
+  --z-modal:    500;
+  --z-toast:    600;
+}
+
+/* Focus ring uses brand blue at 35% alpha — keeps the monochromatic
+   identity (Starnes used red here because its logo carried red). */
+:root {
+  --focus-ring: 0 0 0 3px rgba(4, 93, 145, 0.35);
+}

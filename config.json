@@ -1,0 +1,85 @@
+{
+  "slug": "charlotte",
+  "name": "Charlotte Temperature Controls",
+  "shortName": "Charlotte",
+  "tagline": "We Make Connections That Matter",
+  "heroHeading": "Connections That Matter. Building automation and HVAC across the Carolinas since 1988.",
+  "heroParagraph": "Honeywell-accredited building automation and HVAC service across North and South Carolina. From hospital BAS to multi-site retail networks, we design, install, and service the controls that keep commercial buildings running. Local team. National platform.",
+  "phone": "(704) 509-0707",
+  "phoneE164": "+17045090707",
+  "phoneEmergency": "(800) 782-7637",
+  "phoneEmergencyE164": "+18007827637",
+  "email": "info@ctccontrols.com",
+  "address": {
+    "street": "1705-A Orr Industrial Ct.",
+    "city": "Charlotte",
+    "state": "NC",
+    "zip": "28213"
+  },
+  "mapCoords": { "lat": 35.2929, "lng": -80.7757 },
+  "mapCoordsTodo": "Approximated for 1705-A Orr Industrial Ct, Charlotte NC 28213. Refine to street-level if available.",
+  "canonicalUrl": "https://ctccontrols.com",
+  "parentLink": "https://firstcallmechanical.com",
+  "isExternalDomain": true,
+  "heroVideo": "shared/img/videos/charlotte-raw_flyover.mp4",
+  "heroVideoTodo": "Reusing STR's Charlotte flyover (18 MB raw). Compress to ~3-5 MB before launch (target 720p, H.264, ~2 Mbps).",
+  "heroPhoto": "",
+  "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
+  "industriesLead": "From hospital systems to data centers to multi-site retail — we serve the buildings that keep the Carolinas running. If it has a control system, we know it.",
+  "photoStrip": [],
+  "photoStripTodo": "Add 3-4 jobsite/facility photos to shared/img/photos/ctc/ and reference here. Suggested mix: a Niagara/BAS head-end screen, a mechanical room overview, a rooftop/AHU shot, and a tech-on-site photo.",
+  "partners": {
+    "eyebrow": "Honeywell Accredited & Awarded",
+    "heading": "A Honeywell Authorized Building Controls Specialist.",
+    "body": "We're a Honeywell-accredited integrator with three decades of awards behind the badge — recognized for both technical execution and customer service across the Carolinas."
+  },
+  "services": [
+    {
+      "key": "commercial",
+      "slug": "commercial-hvac",
+      "title": "Commercial HVAC & Controls",
+      "body": "Service, integration, and project work for commercial mechanical systems — RTUs, chillers, boilers, AHUs, and the building automation systems that tie them together."
+    },
+    {
+      "key": "planned",
+      "slug": "planned-maintenance",
+      "title": "Planned Maintenance",
+      "body": "Programmatic service plans for commercial facilities — predictable scheduling, asset-level reporting, priority dispatch for emergencies."
+    },
+    {
+      "key": "emergency",
+      "slug": "emergency",
+      "title": "Emergency Services",
+      "body": "24 / 7 emergency response on a dedicated line — (800) 782-7637. Staffed dispatch, on-call techs, stocked trucks."
+    },
+    {
+      "key": "projects",
+      "slug": "project-support",
+      "title": "Project Support",
+      "body": "Controls retrofits, equipment changeouts, BAS migrations, and capital projects — design, install, commission, and service after."
+    }
+  ],
+  "servicesReviewTodo": "Service bodies adapted from Starnes with a controls/BAS lean given CTC's identity. Have the CTC team review for accuracy of scope claims and tone.",
+  "technicalExperience": [
+    "Building Automation Systems (BAS)",
+    "Niagara Framework & Tridium",
+    "Honeywell Controls & WEBs",
+    "Direct Digital Controls (DDC)",
+    "Pneumatic-to-DDC Conversions",
+    "Air Handlers (AHUs)",
+    "Boilers — Hot Water & Steam",
+    "Chillers — Air-Cooled & Water-Cooled",
+    "Cooling Towers",
+    "DOAS Units",
+    "Fan Coil Units & VAV Boxes",
+    "Heat Pumps — Commercial",
+    "Make-Up Air Units",
+    "Rooftop Units (RTUs)",
+    "Split Systems — Commercial",
+    "Variable Frequency Drives (VFDs)",
+    "VRF / VRV Systems"
+  ],
+  "technicalExperienceTodo": "Equipment list reweighted toward controls/BAS for CTC's identity. Confirm with the CTC team — add/remove items based on actual capability.",
+  "stateLicenses": [],
+  "stateLicensesTodo": "Add NC + SC contractor + low-voltage license numbers. NC HVAC H-1/H-2/H-3, NC Limited/Intermediate/Unlimited Electrical, SC Mechanical, SC Electrical — confirm what's required and supply numbers."
+}
