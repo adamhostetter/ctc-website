@@ -83,6 +83,12 @@
   --color-secondary-dark: #3D3E40;  /* Darker gray for hover states */
   --color-secondary-soft: #BCBDBE;  /* Pale gray for borders / dividers */
 
+  /* Map green — pulled from the CTC service-area graphic ("Service Area"
+     label + Charlotte HQ star). Used for the hero eyebrow so it picks
+     up on the brand's existing third color and pops against the
+     navy-blue hero video. */
+  --color-map-green:      #8FB23B;  /* Sage map green — service-area graphic */
+
   /* Accent — CTC has no contrasting accent in the logo, so we lean
      into the brand blue itself. CTAs use --color-primary directly.
      --color-accent maps to the same blue so any template code that
@@ -899,7 +905,10 @@ small, .text-small { font-size: var(--text-sm); }
 }
 
 .site-header__logo svg {
-  height: 39px;
+  /* 20% larger than the prior 39px. Header stays at --header-height (80px);
+     the logo just consumes more of the existing vertical room — no extra
+     padding/border was around it, so nothing else needs adjusting. */
+  height: 47px;
   width: auto;
   display: block;
 }

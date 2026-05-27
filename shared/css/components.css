@@ -378,7 +378,10 @@
 }
 
 .site-header__logo svg {
-  height: 39px;
+  /* 20% larger than the prior 39px. Header stays at --header-height (80px);
+     the logo just consumes more of the existing vertical room — no extra
+     padding/border was around it, so nothing else needs adjusting. */
+  height: 47px;
   width: auto;
   display: block;
 }
