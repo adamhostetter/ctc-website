@@ -1,5 +1,5 @@
 /**
- * Cloudflare Pages Function — Starnes Inc. (starnesinc.com)
+ * Cloudflare Pages Function — Charlotte Temperature Controls (ctccontrols.com)
  *
  * Two responsibilities:
  *   1. Form submissions — POST /api/contact accepts form data, looks up
@@ -8,7 +8,7 @@
  *
  * Anti-spam (five layers, cheapest first; any match → silent ok so bots
  * can't tell the submission was rejected):
- *   1. Origin allowlist  — reject POSTs not coming from starnesinc.com
+ *   1. Origin allowlist  — reject POSTs not coming from ctccontrols.com
  *   2. Honeypot          — hidden _honeypot input filled = bot
  *   3. Min-submit-time   — JS writes _ts on page load; reject if elapsed < 3s
  *   4. Cloudflare Turnstile — siteverify the cf-turnstile-response token
@@ -38,21 +38,26 @@ export default {
 // =============================================================================
 
 const FORM_ROUTING = {
-  "starnes-contact": ["service@starnesinc.com", "Adam.Hostetter@firstcallgroup.com"],
+  "ctc-contact": [
+    "codys@ctccontrols.com",
+    "service@ctccontrols.com",
+    "info@ctccontrols.com",
+    "Adam.Hostetter@firstcallgroup.com",
+  ],
 };
 
 const FORM_LABELS = {
-  "starnes-contact": "Starnes Inc. contact form",
+  "ctc-contact": "Charlotte Temperature Controls contact form",
 };
 
-const FROM_EMAIL = "Starnes Inc. <noreply@firstcallgroup.com>";
+const FROM_EMAIL = "Charlotte Temperature Controls <noreply@firstcallgroup.com>";
 
 // Hostnames a contact-form POST is allowed to come from. Add a preview .pages.dev
 // entry if you want to test forms on Cloudflare preview deploys.
 const ALLOWED_ORIGINS = new Set([
-  "https://starnesinc.com",
-  "https://www.starnesinc.com",
-  "https://starnes-inc.pages.dev",
+  "https://ctccontrols.com",
+  "https://www.ctccontrols.com",
+  "https://ctc-website.pages.dev",
 ]);
 
 // Minimum time (ms) between page-load timestamp (_ts) and submission.
