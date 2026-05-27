@@ -1874,6 +1874,10 @@ small, .text-small { font-size: var(--text-sm); }
       max-width: 100%;
       width: min(420px, 80%);
       height: auto;
+      /* The PNG has a baked-in white background. Multiply blends it into
+         the cream surface (white × cream = cream) so only the dark wordmark
+         and outline render against the section bg. */
+      mix-blend-mode: multiply;
     }
     .partner-strip__heading {
       font-family: var(--font-display);

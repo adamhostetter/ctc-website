@@ -1965,6 +1965,9 @@ small, .text-small { font-size: var(--text-sm); }
       max-width: 100%;
       width: 180px;
       height: auto;
+      /* The PNG has a baked-in white background. Multiply blends it into
+         the cream card behind it so only the dark wordmark renders. */
+      mix-blend-mode: multiply;
     }
 
     /* Service Area section — centered map graphic + supporting copy. */
