@@ -71,9 +71,17 @@
      COLOR — Brand: CTC blue (single-color system)
      -------------------------------------------------------- */
   --color-primary:        #045D91;  /* CTC brand blue — logo primary */
-  --color-primary-dark:   #023A5C;  /* Deep navy — header / footer */
+  --color-primary-dark:   #023A5C;  /* Deep navy — deeper layer (mobile drawer, etc) */
   --color-primary-mid:    #1276B0;  /* Lifted blue — cards on dark */
   --color-primary-soft:   #7CB8DC;  /* Pale sky — borders, soft fills */
+
+  /* Secondary — logo gray. Pairs with the brand blue without competing
+     with it. Reserved for subtle accents (eyebrows on light surfaces,
+     muted text, secondary CTAs). Also exposed as --color-text-muted
+     for body copy below. */
+  --color-secondary:      #595A5C;  /* Logo gray — "TEMPERATURE" wordmark */
+  --color-secondary-dark: #3D3E40;  /* Darker gray for hover states */
+  --color-secondary-soft: #BCBDBE;  /* Pale gray for borders / dividers */
 
   /* Accent — CTC has no contrasting accent in the logo, so we lean
      into the brand blue itself. CTAs use --color-primary directly.
@@ -852,10 +860,14 @@ small, .text-small { font-size: var(--text-sm); }
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  background: rgba(0, 0, 107, 0.92);
+  /* CTC brand blue (#045D91) — was rgba(0,0,107,...) which carried over from
+     Starnes (#00006B) and felt off-brand. Using the literal logo blue makes
+     the header read as CTC at a glance. */
+  background: rgba(4, 93, 145, 0.92);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  border-bottom: 1px solid rgba(92, 92, 209, 0.35);
+  /* Border tinted to CTC sky (--color-primary-soft #7CB8DC) — was Starnes pale blue */
+  border-bottom: 1px solid rgba(124, 184, 220, 0.35);
   height: var(--header-height);
   display: flex;
   align-items: center;
@@ -864,7 +876,7 @@ small, .text-small { font-size: var(--text-sm); }
 
 .site-header.is-scrolled {
   box-shadow: 0 1px 0 rgba(0,0,0,0.4), var(--shadow-sm);
-  background: rgba(0, 0, 107, 0.97);
+  background: rgba(4, 93, 145, 0.97);
 }
 
 .site-header__inner {
@@ -965,10 +977,11 @@ small, .text-small { font-size: var(--text-sm); }
   top: calc(100% + 6px);
   left: -8px;
   min-width: 240px;
-  background: rgba(0, 0, 107, 0.97);
+  /* CTC brand blue — matches the header it descends from. */
+  background: rgba(4, 93, 145, 0.97);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  border: 1px solid rgba(92, 92, 209, 0.35);
+  border: 1px solid rgba(124, 184, 220, 0.35);
   border-radius: var(--radius-md);
   padding: var(--space-2);
   box-shadow: var(--shadow-lg);
@@ -1062,7 +1075,7 @@ small, .text-small { font-size: var(--text-sm); }
   .site-nav.is-open { transform: translateY(0); }
   .site-nav__link {
     padding-block: var(--space-4);
-    border-bottom: 1px solid rgba(92, 92, 209, 0.4);
+    border-bottom: 1px solid rgba(124, 184, 220, 0.4);
     font-size: var(--text-lg);
   }
   .site-nav__link:last-child { border-bottom: none; }
@@ -1076,7 +1089,7 @@ small, .text-small { font-size: var(--text-sm); }
     width: 100%;
     justify-content: space-between;
     padding-block: var(--space-4);
-    border-bottom: 1px solid rgba(92, 92, 209, 0.4);
+    border-bottom: 1px solid rgba(124, 184, 220, 0.4);
     font-size: var(--text-lg);
     color: var(--color-text-on-dark);
   }
@@ -1101,7 +1114,7 @@ small, .text-small { font-size: var(--text-sm); }
   .site-nav__dropdown-link {
     padding-block: var(--space-3);
     padding-left: var(--space-5);
-    border-bottom: 1px solid rgba(92, 92, 209, 0.25);
+    border-bottom: 1px solid rgba(124, 184, 220, 0.25);
     font-size: var(--text-base);
   }
 }
@@ -1827,6 +1840,49 @@ small, .text-small { font-size: var(--text-sm); }
   color: var(--color-text);
 }
 
+
+    /* Partner strip — Honeywell accreditation callout
+       Only renders on services with a `partners` config block
+       (currently just building-controls). Same visual treatment
+       that previously lived on the home page before being moved
+       to the controls-specific page. */
+    .partner-strip {
+      background: var(--color-primary-dark);
+      color: var(--color-text-on-dark);
+      padding: var(--space-7) 0;
+    }
+    .partner-strip__inner {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      align-items: center;
+      text-align: center;
+    }
+    .partner-strip__eyebrow {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      letter-spacing: var(--tracking-caps);
+      text-transform: uppercase;
+      color: var(--color-accent-light);
+    }
+    .partner-strip__heading {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+      font-weight: var(--weight-bold);
+      letter-spacing: var(--tracking-tight);
+      line-height: var(--leading-tight);
+      margin: 0;
+      max-width: 56ch;
+    }
+    .partner-strip__body {
+      font-size: var(--text-lg);
+      line-height: var(--leading-normal);
+      color: var(--color-text-on-dark);
+      opacity: 0.9;
+      max-width: 64ch;
+      margin: var(--space-2) 0 0;
+    }
   </style>
 </head>
 
@@ -1916,7 +1972,8 @@ small, .text-small { font-size: var(--text-sm); }
             <svg class="site-nav__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="site-nav__dropdown" data-dropdown-menu>
-            <a class="site-nav__dropdown-link" href="commercial-hvac.html">Commercial HVAC &amp; Controls</a>
+            <a class="site-nav__dropdown-link" href="building-controls.html">Building Controls</a>
+            <a class="site-nav__dropdown-link" href="commercial-hvac.html">Commercial HVAC</a>
             <a class="site-nav__dropdown-link" href="planned-maintenance.html">Planned Maintenance</a>
             <a class="site-nav__dropdown-link" href="emergency.html">Emergency Services</a>
             <a class="site-nav__dropdown-link" href="project-support.html">Project Support</a>
@@ -1949,6 +2006,11 @@ small, .text-small { font-size: var(--text-sm); }
         </div>
       </div>
     </section>
+
+    <!-- 1a. PARTNER STRIP — only renders if config has `partners` block.
+         Used by services/building-controls to surface the Honeywell
+         accreditation as a controls-specific identity signal. -->
+    
 
     <!-- 2. WHAT'S INCLUDED — feature grid -->
     <section class="section">
@@ -2127,7 +2189,8 @@ small, .text-small { font-size: var(--text-sm); }
         <div>
           <div class="site-footer__heading">Services</div>
           <ul class="site-footer__list">
-            <li><a href="commercial-hvac.html">Commercial HVAC &amp; Controls</a></li>
+            <li><a href="building-controls.html">Building Controls</a></li>
+            <li><a href="commercial-hvac.html">Commercial HVAC</a></li>
             <li><a href="planned-maintenance.html">Planned Maintenance</a></li>
             <li><a href="emergency.html">Emergency Services</a></li>
             <li><a href="project-support.html">Project Support</a></li>

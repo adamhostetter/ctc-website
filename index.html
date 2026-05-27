@@ -108,9 +108,17 @@
      COLOR — Brand: CTC blue (single-color system)
      -------------------------------------------------------- */
   --color-primary:        #045D91;  /* CTC brand blue — logo primary */
-  --color-primary-dark:   #023A5C;  /* Deep navy — header / footer */
+  --color-primary-dark:   #023A5C;  /* Deep navy — deeper layer (mobile drawer, etc) */
   --color-primary-mid:    #1276B0;  /* Lifted blue — cards on dark */
   --color-primary-soft:   #7CB8DC;  /* Pale sky — borders, soft fills */
+
+  /* Secondary — logo gray. Pairs with the brand blue without competing
+     with it. Reserved for subtle accents (eyebrows on light surfaces,
+     muted text, secondary CTAs). Also exposed as --color-text-muted
+     for body copy below. */
+  --color-secondary:      #595A5C;  /* Logo gray — "TEMPERATURE" wordmark */
+  --color-secondary-dark: #3D3E40;  /* Darker gray for hover states */
+  --color-secondary-soft: #BCBDBE;  /* Pale gray for borders / dividers */
 
   /* Accent — CTC has no contrasting accent in the logo, so we lean
      into the brand blue itself. CTAs use --color-primary directly.
@@ -889,10 +897,14 @@ small, .text-small { font-size: var(--text-sm); }
   position: sticky;
   top: 0;
   z-index: var(--z-header);
-  background: rgba(0, 0, 107, 0.92);
+  /* CTC brand blue (#045D91) — was rgba(0,0,107,...) which carried over from
+     Starnes (#00006B) and felt off-brand. Using the literal logo blue makes
+     the header read as CTC at a glance. */
+  background: rgba(4, 93, 145, 0.92);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  border-bottom: 1px solid rgba(92, 92, 209, 0.35);
+  /* Border tinted to CTC sky (--color-primary-soft #7CB8DC) — was Starnes pale blue */
+  border-bottom: 1px solid rgba(124, 184, 220, 0.35);
   height: var(--header-height);
   display: flex;
   align-items: center;
@@ -901,7 +913,7 @@ small, .text-small { font-size: var(--text-sm); }
 
 .site-header.is-scrolled {
   box-shadow: 0 1px 0 rgba(0,0,0,0.4), var(--shadow-sm);
-  background: rgba(0, 0, 107, 0.97);
+  background: rgba(4, 93, 145, 0.97);
 }
 
 .site-header__inner {
@@ -1002,10 +1014,11 @@ small, .text-small { font-size: var(--text-sm); }
   top: calc(100% + 6px);
   left: -8px;
   min-width: 240px;
-  background: rgba(0, 0, 107, 0.97);
+  /* CTC brand blue — matches the header it descends from. */
+  background: rgba(4, 93, 145, 0.97);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
-  border: 1px solid rgba(92, 92, 209, 0.35);
+  border: 1px solid rgba(124, 184, 220, 0.35);
   border-radius: var(--radius-md);
   padding: var(--space-2);
   box-shadow: var(--shadow-lg);
@@ -1099,7 +1112,7 @@ small, .text-small { font-size: var(--text-sm); }
   .site-nav.is-open { transform: translateY(0); }
   .site-nav__link {
     padding-block: var(--space-4);
-    border-bottom: 1px solid rgba(92, 92, 209, 0.4);
+    border-bottom: 1px solid rgba(124, 184, 220, 0.4);
     font-size: var(--text-lg);
   }
   .site-nav__link:last-child { border-bottom: none; }
@@ -1113,7 +1126,7 @@ small, .text-small { font-size: var(--text-sm); }
     width: 100%;
     justify-content: space-between;
     padding-block: var(--space-4);
-    border-bottom: 1px solid rgba(92, 92, 209, 0.4);
+    border-bottom: 1px solid rgba(124, 184, 220, 0.4);
     font-size: var(--text-lg);
     color: var(--color-text-on-dark);
   }
@@ -1138,7 +1151,7 @@ small, .text-small { font-size: var(--text-sm); }
   .site-nav__dropdown-link {
     padding-block: var(--space-3);
     padding-left: var(--space-5);
-    border-bottom: 1px solid rgba(92, 92, 209, 0.25);
+    border-bottom: 1px solid rgba(124, 184, 220, 0.25);
     font-size: var(--text-base);
   }
 }
@@ -1505,9 +1518,11 @@ small, .text-small { font-size: var(--text-sm); }
   position: absolute;
   inset: 0;
   z-index: -1;
+  /* Hero overlay tinted to CTC navy (#023A5C = rgb(2,58,92)) instead of the
+     Starnes royal-navy rgba(0,0,107) that was in this file by inheritance. */
   background:
-    linear-gradient(100deg, rgba(0, 0, 107, 0.85) 0%, rgba(0, 0, 107, 0.62) 38%, rgba(0, 0, 107, 0.30) 70%, rgba(0, 0, 107, 0.20) 100%),
-    linear-gradient(180deg, rgba(0, 0, 107, 0.35) 0%, rgba(0, 0, 107, 0.10) 30%, rgba(0, 0, 107, 0.10) 70%, rgba(0, 0, 107, 0.55) 100%);
+    linear-gradient(100deg, rgba(2, 58, 92, 0.85) 0%, rgba(2, 58, 92, 0.62) 38%, rgba(2, 58, 92, 0.30) 70%, rgba(2, 58, 92, 0.20) 100%),
+    linear-gradient(180deg, rgba(2, 58, 92, 0.35) 0%, rgba(2, 58, 92, 0.10) 30%, rgba(2, 58, 92, 0.10) 70%, rgba(2, 58, 92, 0.55) 100%);
 }
 .branch-hero__inner {
   position: relative;
@@ -1918,45 +1933,6 @@ small, .text-small { font-size: var(--text-sm); }
 .contact-card__value a { color: var(--color-text); font-weight: var(--weight-medium); }
 .contact-card__value a:hover { color: var(--color-accent); }
 
-
-    /* Partner strip — Honeywell accreditation callout */
-    .partner-strip {
-      background: var(--color-primary-dark);
-      color: var(--color-text-on-dark);
-      padding: var(--space-7) 0;
-    }
-    .partner-strip__inner {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-      align-items: center;
-      text-align: center;
-    }
-    .partner-strip__eyebrow {
-      font-family: var(--font-display);
-      font-size: var(--text-sm);
-      font-weight: var(--weight-semibold);
-      letter-spacing: var(--tracking-caps);
-      text-transform: uppercase;
-      color: var(--color-accent-light);
-    }
-    .partner-strip__heading {
-      font-family: var(--font-display);
-      font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
-      font-weight: var(--weight-bold);
-      letter-spacing: var(--tracking-tight);
-      line-height: var(--leading-tight);
-      margin: 0;
-      max-width: 56ch;
-    }
-    .partner-strip__body {
-      font-size: var(--text-lg);
-      line-height: var(--leading-normal);
-      color: var(--color-text-on-dark);
-      opacity: 0.9;
-      max-width: 64ch;
-      margin: var(--space-2) 0 0;
-    }
   </style>
 </head>
 
@@ -2046,7 +2022,8 @@ small, .text-small { font-size: var(--text-sm); }
             <svg class="site-nav__caret" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4 L6 8 L10 4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
           <div class="site-nav__dropdown" data-dropdown-menu>
-            <a class="site-nav__dropdown-link" href="services/commercial-hvac.html">Commercial HVAC &amp; Controls</a>
+            <a class="site-nav__dropdown-link" href="services/building-controls.html">Building Controls</a>
+            <a class="site-nav__dropdown-link" href="services/commercial-hvac.html">Commercial HVAC</a>
             <a class="site-nav__dropdown-link" href="services/planned-maintenance.html">Planned Maintenance</a>
             <a class="site-nav__dropdown-link" href="services/emergency.html">Emergency Services</a>
             <a class="site-nav__dropdown-link" href="services/project-support.html">Project Support</a>
@@ -2091,7 +2068,7 @@ small, .text-small { font-size: var(--text-sm); }
       <div class="container">
         <div class="branch-hero__inner">
           <span class="branch-hero__eyebrow">Charlotte Temperature Controls · Charlotte, NC · Since 1988</span>
-          <h1 class="branch-hero__title">Connections That Matter. Building automation and HVAC across the Carolinas since 1988.</h1>
+          <h1 class="branch-hero__title">Connections That Matter. Serving the Carolinas for 35+ years.</h1>
           <p class="branch-hero__lede">Honeywell-accredited building automation and HVAC service across North and South Carolina. From hospital BAS to multi-site retail networks, we design, install, and service the controls that keep commercial buildings running. Local team. National platform.</p>
           <div class="branch-hero__cta">
             <a class="btn btn--primary btn--lg" href="tel:+17045090707">Call (704) 509-0707</a>
@@ -2101,21 +2078,7 @@ small, .text-small { font-size: var(--text-sm); }
       </div>
     </section>
 
-    <!-- 2. PARTNER STRIP — Honeywell accreditation callout
-         CTC-specific section: the Honeywell partnership is a core
-         identity signal carried over from the legacy site, so we
-         surface it prominently between the hero and the services grid. -->
-    
-    <section class="partner-strip" aria-labelledby="partner-heading">
-      <div class="container partner-strip__inner">
-        <span class="partner-strip__eyebrow">Honeywell Accredited & Awarded</span>
-        <h2 id="partner-heading" class="partner-strip__heading">A Honeywell Authorized Building Controls Specialist.</h2>
-        <p class="partner-strip__body">We're a Honeywell-accredited integrator with three decades of awards behind the badge — recognized for both technical execution and customer service across the Carolinas.</p>
-      </div>
-    </section>
-    
-
-    <!-- 3. PHOTO STRIP -->
+    <!-- 2. PHOTO STRIP -->
     
     <section class="photo-strip-section">
       <div class="container">
@@ -2137,12 +2100,21 @@ small, .text-small { font-size: var(--text-sm); }
 
         <div class="capabilities">
           
+          <a class="capability" id="service-controls" href="services/building-controls.html">
+            <span class="capability__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </span>
+            <h4 class="capability__title">Building Controls</h4>
+            <p class="capability__body">Honeywell-accredited BAS design, integration, and tuning — Niagara, WEBs, BACnet. Controls is our front door, not a sideline.</p>
+            <span class="capability__cta" aria-hidden="true">Learn more →</span>
+          </a>
+          
           <a class="capability" id="service-commercial" href="services/commercial-hvac.html">
             <span class="capability__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
             </span>
-            <h4 class="capability__title">Commercial HVAC & Controls</h4>
-            <p class="capability__body">Service, integration, and project work for commercial mechanical systems — RTUs, chillers, boilers, AHUs, and the building automation systems that tie them together.</p>
+            <h4 class="capability__title">Commercial HVAC</h4>
+            <p class="capability__body">Service, repair, and replacement for commercial mechanical systems — RTUs, chillers, boilers, AHUs, and the equipment behind your controls layer.</p>
             <span class="capability__cta" aria-hidden="true">Learn more →</span>
           </a>
           
@@ -2252,7 +2224,7 @@ small, .text-small { font-size: var(--text-sm); }
           <g class="industry-hex"><polygon class="hex hex--tier-2" points="140,335 200,370 200,440 140,475 80,440 80,370"/><text class="hex-label" text-anchor="middle" x="140" y="398">Sports</text><text class="hex-label" text-anchor="middle" x="140" y="415">&amp; Venues</text></g>
           <g class="industry-hex"><polygon class="hex hex--tier-1" points="260,335 320,370 320,440 260,475 200,440 200,370"/><text class="hex-label" text-anchor="middle" x="260" y="398">Data</text><text class="hex-label" text-anchor="middle" x="260" y="415">Centers</text></g>
           <g class="industry-hex"><polygon class="hex hex--tier-1" points="380,335 440,370 440,440 380,475 320,440 320,370"/><text class="hex-label" text-anchor="middle" x="380" y="398">Advanced</text><text class="hex-label" text-anchor="middle" x="380" y="415">Manufacturing</text></g>
-          <g class="industry-hex"><polygon class="hex hex--tier-2" points="500,335 560,370 560,440 500,475 440,440 440,370"/><text class="hex-label" text-anchor="middle" x="500" y="410">Office</text></g>
+          <g class="industry-hex"><polygon class="hex hex--tier-2" points="500,335 560,370 560,440 500,475 440,440 440,370"/><text class="hex-label" text-anchor="middle" x="500" y="398">Banking</text><text class="hex-label" text-anchor="middle" x="500" y="415">&amp; Finance</text></g>
           <g class="industry-hex"><polygon class="hex hex--tier-2" points="200,440 260,475 260,545 200,580 140,545 140,475"/><text class="hex-label" text-anchor="middle" x="200" y="515">Senior Living</text></g>
           <g class="industry-hex"><polygon class="hex hex--tier-2" points="320,440 380,475 380,545 320,580 260,545 260,475"/><text class="hex-label" text-anchor="middle" x="320" y="515">Retail</text></g>
           <g class="industry-hex"><polygon class="hex hex--tier-2" points="440,440 500,475 500,545 440,580 380,545 380,475"/><text class="hex-label" text-anchor="middle" x="440" y="515">Multifamily</text></g>
@@ -2465,7 +2437,8 @@ small, .text-small { font-size: var(--text-sm); }
         <div>
           <div class="site-footer__heading">Services</div>
           <ul class="site-footer__list">
-            <li><a href="services/commercial-hvac.html">Commercial HVAC &amp; Controls</a></li>
+            <li><a href="services/building-controls.html">Building Controls</a></li>
+            <li><a href="services/commercial-hvac.html">Commercial HVAC</a></li>
             <li><a href="services/planned-maintenance.html">Planned Maintenance</a></li>
             <li><a href="services/emergency.html">Emergency Services</a></li>
             <li><a href="services/project-support.html">Project Support</a></li>

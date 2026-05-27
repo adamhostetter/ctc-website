@@ -33,9 +33,17 @@
      COLOR — Brand: CTC blue (single-color system)
      -------------------------------------------------------- */
   --color-primary:        #045D91;  /* CTC brand blue — logo primary */
-  --color-primary-dark:   #023A5C;  /* Deep navy — header / footer */
+  --color-primary-dark:   #023A5C;  /* Deep navy — deeper layer (mobile drawer, etc) */
   --color-primary-mid:    #1276B0;  /* Lifted blue — cards on dark */
   --color-primary-soft:   #7CB8DC;  /* Pale sky — borders, soft fills */
+
+  /* Secondary — logo gray. Pairs with the brand blue without competing
+     with it. Reserved for subtle accents (eyebrows on light surfaces,
+     muted text, secondary CTAs). Also exposed as --color-text-muted
+     for body copy below. */
+  --color-secondary:      #595A5C;  /* Logo gray — "TEMPERATURE" wordmark */
+  --color-secondary-dark: #3D3E40;  /* Darker gray for hover states */
+  --color-secondary-soft: #BCBDBE;  /* Pale gray for borders / dividers */
 
   /* Accent — CTC has no contrasting accent in the logo, so we lean
      into the brand blue itself. CTAs use --color-primary directly.
