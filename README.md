@@ -1,8 +1,8 @@
 # Charlotte Temperature Controls (CTC) Website
 
-Standalone website for **Charlotte Temperature Controls** — a Honeywell-accredited building automation and commercial HVAC company serving North and South Carolina since 1988. A FirstCall company.
+Standalone website for **Charlotte Temperature Controls** — a building automation and commercial HVAC company serving North and South Carolina since 1988. A FirstCall company and a Reliable Controls Authorized Dealer.
 
-Built from the same template pipeline as `Starnes HVAC/` (sibling folder) — single-location standalone-brand pattern — but with a **CTC-specific monochromatic blue palette**, a Honeywell partner-strip section, and a controls/BAS-leaning content set (residential service removed; commercial scope only).
+Built from the same template pipeline as `Starnes HVAC/` (sibling folder) — single-location standalone-brand pattern — but with a **CTC-specific monochromatic blue palette**, a dedicated Building Controls service page, and a controls/BAS-leaning content set (residential service removed; commercial scope only).
 
 ---
 
@@ -12,6 +12,7 @@ Built from the same template pipeline as `Starnes HVAC/` (sibling folder) — si
 CTC/
 ├── index.html               ← Charlotte HQ (single location)
 ├── services/
+│   ├── building-controls.html    (Reliable Controls dealer; BAS focus)
 │   ├── commercial-hvac.html      (adapted from Starnes; BAS/controls lean)
 │   ├── planned-maintenance.html  (adapted)
 │   ├── emergency.html            (adapted; 24/7 line: 1-800-782-7637)
@@ -22,8 +23,8 @@ CTC/
 │   ├── css/                 ← tokens + base + components + branch + service
 │   ├── js/site.js           ← nav dropdowns, header scroll, hero video, parallax
 │   ├── templates/
-│   │   ├── branch.html      ← single-location template, includes Honeywell partner strip
-│   │   └── service.html     ← service template (no location picker)
+│   │   ├── branch.html      ← single-location template, Reliable Controls badge in footer
+│   │   └── service.html     ← service template; partner-strip block for building-controls
 │   ├── partials/industries-grid--main.html
 │   └── img/
 │       ├── logos/
@@ -78,24 +79,23 @@ CTC uses a **monochromatic single-blue system** built around its own logo colors
 
 **Liberties taken vs. Starnes pattern:**
 - Header tagline next to the logo reads **"Since 1988"** (CTC's founding year, three decades).
-- Hero eyebrow reads `Charlotte Temperature Controls · Charlotte, NC · Since 1988`.
+- Hero eyebrow reads `Charlotte Temperature Controls · Charlotte, NC · Since 1988`, colored to the CTC service-area map green for contrast against the navy hero overlay.
 - The "A FirstCall Company" section heading reads **"Carolinas local. National platform."** (vs. Starnes's "50 years local").
-- **New partner-strip section** between hero and capabilities — surfaces the Honeywell accreditation as a brand-identity signal carried over from CTC's legacy website. Inline-styled in `branch.html` so it doesn't require touching `branch.css`.
+- **Building Controls is the lead service page** (and lead nav entry) — it's the brand-identity service. Hosts the Reliable Controls Authorized Dealer partner-strip between hero and feature grid.
+- **Reliable Controls Authorized Dealer badge in the footer** of every page, linking back to the controls page.
 - Residential service entry removed everywhere (templates, configs, nav, footer, form select) — CTC is commercial-only.
 - Service-form CTA is `ctc-contact` (was `starnes-contact`).
 
 ---
 
-## Honeywell accreditation — where it surfaces
+## Reliable Controls — where the partnership shows up
 
-This is a load-bearing brand-identity signal (it's the top callout on the legacy site), so it shows up multiple places:
+CTC is a Reliable Controls Authorized Dealer. The legacy Honeywell partnership was retired before this site went live, so the badge surfaces in just two places:
 
-1. **Partner strip** (new section in `branch.html`) — full-width navy band between hero and capabilities. Heading: "A Honeywell Authorized Building Controls Specialist."
-2. **Hero paragraph** — "Honeywell-accredited building automation and HVAC service across North and South Carolina."
-3. **Commercial HVAC service page** — lede mentions "Honeywell-accredited," whyBullets lead with "Honeywell-accredited controls integrator (Niagara / WEBs / Tridium)."
-4. **Meta descriptions** — index + commercial-hvac surface "Honeywell-accredited" in the SERP snippet.
+1. **Footer of every page** — small Reliable Controls Authorized Dealer badge in the brand column, linked to `services/building-controls.html`.
+2. **Building Controls service page** — full-width partner-strip section between the hero and feature grid, hosting the official Reliable Controls Authorized Dealer badge with supporting copy.
 
-To **change or expand** the partner section, edit the `partners` object in `config.json` (eyebrow / heading / body). No template edits required.
+To swap or expand the partner section, edit the `partners` object in `services/building-controls/config.json` (heading / body). The badge image is `shared/img/logos/reliable-controls-dealer.png`.
 
 ---
 
@@ -120,26 +120,23 @@ Then list them in `config.json` `photoStrip` array.
 `mapCoords` in `config.json` are approximated for the 1705-A Orr Industrial Ct. address. Refine to street-level if you want the JSON-LD geo block to be tight.
 
 ### 5. Confirm partner copy
-The Honeywell partner strip text in `config.json` `partners.*` is drafted (eyebrow / heading / body). Have the CTC team review for accuracy — particularly the "three decades of awards" claim. If CTC has specific Honeywell award names/years to cite, add them to the body copy.
+The Reliable Controls partner-strip text in `services/building-controls/config.json` `partners.*` is drafted. Have the CTC team review the language, particularly the claim that Reliable Controls integrates cleanly with multi-vendor environments.
 
 ---
 
 ## ⚠️ Pre-launch content review
 
 ### Service descriptions
-- **`commercial-hvac` was adapted from Starnes** with a controls/BAS lean. Mentions Niagara, WEBs, Tridium, and lists Honeywell as a manufacturer alongside Trane/Carrier/Daikin/JCI/Lennox/Mitsubishi/LG. Confirm the actual manufacturer training list.
+- **`commercial-hvac` was adapted from Starnes** with a controls/BAS lean. Mentions Niagara, Tridium, and lists Reliable Controls alongside Trane/Carrier/Daikin/JCI/Lennox/Mitsubishi/LG. Confirm the actual manufacturer training list.
+- **`building-controls`** is the dedicated controls page — Reliable Controls Authorized Dealer surfacing, multi-vendor integration (JCI, Siemens, Distech, Automated Logic, Tridium), open BACnet emphasis.
 - **`planned-maintenance`, `emergency`, `project-support`** adapted from Starnes — `whyEyebrow` updated to "Why CTC," Lebanon/Southwest VA references replaced with Charlotte/Carolinas. Should still be reviewed for CTC-specific tone.
-- Service titles in the main `config.json` list "Commercial HVAC & Controls" (vs. Starnes's "Commercial HVAC") to signal the controls scope.
 
 ### Geographic claims
 - Hero / footer copy uses "North and South Carolina." Confirm specific metros / counties if more granular targeting is wanted (Charlotte metro, Triangle, Triad, Upstate SC, etc.).
 - Industries grid (the honeycomb) carries the shared 19-industry list — confirm CTC actually serves all of these. If not, swap a few hex labels.
 
-### Building automation as a standalone page?
-Decided **not** to make Building Automation its own service page (per the "Starnes list minus Residential" decision). It's surfaced via the hero, partner strip, commercial-hvac page lede, and the technicalExperience list. **Consider adding** `services/building-automation.html` as a 5th service page if BAS is the lead revenue driver and deserves its own SEO target.
-
-### Honeywell partnership
-The legacy site headlines this. We surface it in 4 places (see above). If CTC has additional manufacturer partnerships (JCI, Schneider, Distech, etc.) worth surfacing, the `partners` object could expand to a list — would require a small template change.
+### Partnerships
+Reliable Controls is the headline partnership. If CTC has additional manufacturer partnerships worth surfacing (JCI, Schneider, Distech, Tridium, etc.), the `partners` object could expand to a list — would require a small template change.
 
 ---
 

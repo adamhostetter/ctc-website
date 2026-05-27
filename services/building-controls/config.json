@@ -1,15 +1,15 @@
 {
   "slug": "building-controls",
   "title": "Building Controls",
-  "lede": "Honeywell-accredited building automation design, integration, and service — from a single VAV box's sequence to a campus-wide Niagara migration. The controls layer is our front door, not a sideline.",
-  "metaDescription": "Honeywell-accredited building automation and controls integration from Charlotte Temperature Controls — Niagara, WEBs, Tridium, BACnet across North and South Carolina.",
+  "lede": "Building automation design, integration, and service — from a single VAV box's sequence to a campus-wide Niagara migration. The controls layer is our front door, not a sideline.",
+  "metaDescription": "Building automation and controls integration from Charlotte Temperature Controls — Reliable Controls Authorized Dealer, Niagara, Tridium, BACnet across North and South Carolina.",
   "canonicalUrl": "https://ctccontrols.com/services/building-controls",
   "careersUrl": "https://firstcallmechanical.com/mechanical/careers",
 
   "partners": {
-    "eyebrow": "Honeywell Accredited & Awarded",
-    "heading": "A Honeywell Authorized Building Controls Specialist.",
-    "body": "We're a Honeywell-accredited integrator with three decades of awards behind the badge — recognized for both technical execution and customer service across the Carolinas."
+    "eyebrow": "Authorized Dealer",
+    "heading": "A Reliable Controls Authorized Dealer.",
+    "body": "We partner with Reliable Controls — a Canadian-built, BACnet-native platform that integrates cleanly with whatever else lives in your building. Reliable's tools, our experience installing them. That's the formula."
   },
 
   "featuresEyebrow": "Capabilities",
@@ -24,8 +24,8 @@
     },
     {
       "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6\"/></svg>",
-      "title": "Honeywell & multi-vendor integration",
-      "body": "Honeywell WEBs / ComfortPoint, Tridium Niagara N4, JCI Metasys, Siemens Desigo, Distech, Automated Logic — we lead with Honeywell, but speak every dialect."
+      "title": "Multi-vendor integration",
+      "body": "Reliable Controls, Tridium Niagara N4, JCI Metasys, Siemens Desigo, Distech, Automated Logic — we lead with open BACnet, no proprietary lock-in."
     },
     {
       "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"22 12 18 12 15 21 9 3 6 12 2 12\"/></svg>",
@@ -50,13 +50,13 @@
   ],
 
   "whyEyebrow": "Why CTC for controls",
-  "whyHeading": "Three decades of Honeywell awards. And a service van outside.",
+  "whyHeading": "Three decades of controls. And a service van outside.",
   "whyParagraphs": [
-    "We came up as a controls house in 1988 and grew into mechanical service from there — not the other way around. Controls isn't an add-on for us; it's the front door. The Honeywell awards going back three decades reflect that depth.",
+    "We came up as a controls house in 1988 and grew into mechanical service from there — not the other way around. Controls isn't an add-on for us; it's the front door.",
     "Our controls group spans installation, integration, and analytics. We hand off systems your in-house facilities team can actually operate and maintain — with documentation that matches what's in the panel."
   ],
   "whyBullets": [
-    "Honeywell Authorized Building Controls Specialist (since 1988)",
+    "Reliable Controls Authorized Dealer",
     "Niagara-certified technicians (N4 / AX migrations)",
     "Manufacturer training on JCI, Siemens, Distech, Automated Logic",
     "Graphics + sequence documentation delivered with every project",

@@ -4,7 +4,7 @@
   "shortName": "Charlotte",
   "tagline": "We Make Connections That Matter",
   "heroHeading": "Connections That Matter. Serving the Carolinas for 35+ years.",
-  "heroParagraph": "Honeywell-accredited building automation and HVAC service across North and South Carolina. From hospital BAS to multi-site retail networks, we design, install, and service the controls that keep commercial buildings running. Local team. National platform.",
+  "heroParagraph": "Building automation and HVAC service across North and South Carolina. From hospital BAS to multi-site retail networks, we design, install, and service the controls that keep commercial buildings running. Local team. National platform.",
   "phone": "(704) 509-0707",
   "phoneE164": "+17045090707",
   "phoneEmergency": "(800) 782-7637",
@@ -33,7 +33,7 @@
       "key": "controls",
       "slug": "building-controls",
       "title": "Building Controls",
-      "body": "Honeywell-accredited BAS design, integration, and tuning — Niagara, WEBs, BACnet. Controls is our front door, not a sideline."
+      "body": "BAS design, integration, and tuning — Reliable Controls, Niagara, open BACnet. Controls is our front door, not a sideline."
     },
     {
       "key": "commercial",
@@ -64,7 +64,7 @@
   "technicalExperience": [
     "Building Automation Systems (BAS)",
     "Niagara Framework & Tridium",
-    "Honeywell Controls & WEBs",
+    "Reliable Controls (Authorized Dealer)",
     "Direct Digital Controls (DDC)",
     "Pneumatic-to-DDC Conversions",
     "Air Handlers (AHUs)",
