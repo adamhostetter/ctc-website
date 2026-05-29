@@ -41,7 +41,6 @@ const FORM_ROUTING = {
   "ctc-contact": [
     "codys@ctccontrols.com",
     "service@ctccontrols.com",
-    "info@ctccontrols.com",
     "Adam.Hostetter@firstcallgroup.com",
   ],
 };
